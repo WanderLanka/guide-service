@@ -8,7 +8,8 @@ const { errorConverter, errorHandler, notFound } = require('./src/middleware/err
 
 // Routers
 const tourPackagesRoutes = require('./src/tourpackages/routes');
-const guidesRoutes = require('./src/guides/routes');
+const guideCrudRoutes = require('./src/guide/routes');
+const featuredGuidesRouter = require('./src/featuredguides');
 
 const app = express();
 
@@ -25,7 +26,12 @@ app.get('/health', (req, res) => {
 
 // Mount routes
 app.use('/tourpackages', tourPackagesRoutes);
-app.use('/guides', guidesRoutes);
+// New guide CRUD endpoints
+app.use('/guide', guideCrudRoutes);
+// (Legacy by-user and sync routes removed; use CRUD with userId instead)
+
+// Expose featured guides at service root
+app.use('/featuredguides', featuredGuidesRouter);
 
 app.use(notFound);
 app.use(errorConverter);
