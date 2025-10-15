@@ -7,8 +7,8 @@ const logger = require('./src/utils/logger');
 const { errorConverter, errorHandler, notFound } = require('./src/middleware/errorHandler');
 
 // Routers
-const createPackageRouter = require('./src/tourpackages/createpackage');
-const featuredGuidesRouter = require('./src/guides/featuredguides');
+const tourPackagesRoutes = require('./src/tourpackages/routes');
+const guidesRoutes = require('./src/guides/routes');
 
 const app = express();
 
@@ -24,8 +24,8 @@ app.get('/health', (req, res) => {
 });
 
 // Mount routes
-app.use('/tourpackages/createpackage', createPackageRouter);
-app.use('/guides/featuredguides', featuredGuidesRouter);
+app.use('/tourpackages', tourPackagesRoutes);
+app.use('/guides', guidesRoutes);
 
 app.use(notFound);
 app.use(errorConverter);
