@@ -1,9 +1,9 @@
 const express = require('express');
-const Guide = require('../../models/Guide');
+const Guide = require('../models/Guide');
 
 const router = express.Router();
 
-// GET /guides/featuredguides?limit=&status=
+// GET /featuredguides?limit=&status=
 router.get('/', async (req, res, next) => {
   try {
     const limit = Number(req.query.limit) > 0 ? Number(req.query.limit) : 10;
