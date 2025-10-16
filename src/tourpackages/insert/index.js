@@ -14,14 +14,21 @@ router.post('/', validate(createPackageSchema), async (req, res, next) => {
       slug,
       title,
       description,
+      details,
       durationDays,
+      duration,
       locations,
       tags,
       images,
+      coverImage,
       includes,
       excludes,
+  highlights,
+  requirements,
       pricing,
       itinerary,
+      policies,
+      maxGroupSize,
       isActive,
     } = req.body;
 
@@ -43,19 +50,34 @@ router.post('/', validate(createPackageSchema), async (req, res, next) => {
       return res.status(409).json({ success: false, error: 'Package slug already exists' });
     }
 
+    // If duration object provided, compute durationDays equivalent
+    let computedDurationDays = durationDays;
+    if (duration && typeof duration.value === 'number' && duration.unit) {
+      if (duration.unit === 'days') computedDurationDays = duration.value;
+      if (duration.unit === 'hours') computedDurationDays = Math.max(1, Math.ceil(duration.value / 24));
+      if (duration.unit === 'minutes') computedDurationDays = Math.max(1, Math.ceil(duration.value / (24 * 60)));
+    }
+
     const doc = await TourPackage.create({
       guideId,
       slug: normalizedSlug,
       title,
       description,
-      durationDays,
+      details,
+      durationDays: computedDurationDays,
+      duration,
       locations,
       tags,
       images,
+      coverImage,
       includes,
       excludes,
+  highlights,
+  requirements,
+      maxGroupSize,
       pricing,
       itinerary,
+      policies,
       isActive,
     });
 

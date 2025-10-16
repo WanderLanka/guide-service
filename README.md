@@ -25,6 +25,18 @@ Key endpoints
 
 Copy `.env.example` to `.env` and set values.
 
+Recommended DB config for microservices isolation:
+
+```
+# Prefer guide-specific DB URI
+GUIDE_MONGO_URI=mongodb://localhost:27017/wanderlanka_guide
+# Optional explicit db name if your URI omits it
+# GUIDE_DB_NAME=wanderlanka_guide
+
+# Fallback (used only if GUIDE_MONGO_URI is not set)
+# MONGO_URI=mongodb://localhost:27017/wanderlanka_guide
+```
+
 ## Run
 
 npm install
