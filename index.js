@@ -10,6 +10,8 @@ const { errorConverter, errorHandler, notFound } = require('./src/middleware/err
 const tourPackagesRoutes = require('./src/tourpackages/routes');
 const guideCrudRoutes = require('./src/guide/routes');
 const featuredGuidesRouter = require('./src/featuredguides');
+const path = require('path');
+const uploadsRouter = require('./src/uploads/routes');
 
 const app = express();
 
@@ -24,6 +26,9 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', service: 'guide-service', timestamp: new Date().toISOString() });
 });
 
+// Serve uploaded files statically
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
 // Mount routes
 app.use('/tourpackages', tourPackagesRoutes);
 // New guide CRUD endpoints
@@ -32,6 +37,8 @@ app.use('/guide', guideCrudRoutes);
 
 // Expose featured guides at service root
 app.use('/featuredguides', featuredGuidesRouter);
+// Uploads
+app.use('/uploads', uploadsRouter);
 
 app.use(notFound);
 app.use(errorConverter);
