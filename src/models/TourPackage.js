@@ -68,6 +68,9 @@ const TourPackageSchema = new mongoose.Schema(
     },
     policies: PoliciesSchema,
     isActive: { type: Boolean, default: true, index: true },
+    // Booking statistics
+    bookingCount: { type: Number, default: 0, min: 0 },
+    totalRevenue: { type: Number, default: 0, min: 0 },
   },
   { timestamps: true, collection: 'tour_packages' }
 );
