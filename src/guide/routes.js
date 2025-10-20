@@ -7,6 +7,7 @@ const updateGuideRouter = require('./update');
 const deleteGuideRouter = require('./delete');
 const updateBookingCountRouter = require('./updateBookingCount');
 const availabilityRouter = require('./availability');
+const updateResponseTimeRouter = require('./updateResponseTime');
 
 const router = express.Router();
 
@@ -21,5 +22,8 @@ router.use('/', updateBookingCountRouter);
 
 // Guide availability (returns available/unavailable dates)
 router.use('/', availabilityRouter);
+
+// Update response time metric
+router.use('/', updateResponseTimeRouter);
 
 module.exports = router;
