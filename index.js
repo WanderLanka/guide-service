@@ -13,6 +13,13 @@ const featuredGuidesRouter = require('./src/featuredguides');
 const path = require('path');
 const uploadsRouter = require('./src/uploads/routes');
 
+// Review routes
+const reviewCreateRouter = require('./src/reviews/create');
+const reviewListRouter = require('./src/reviews/list');
+const reviewUpdateRouter = require('./src/reviews/update');
+const reviewDeleteRouter = require('./src/reviews/delete');
+const reviewHelpfulRouter = require('./src/reviews/helpful');
+
 const app = express();
 
 const PORT = process.env.PORT || 3005;
@@ -39,6 +46,13 @@ app.use('/guide', guideCrudRoutes);
 app.use('/featuredguides', featuredGuidesRouter);
 // Uploads
 app.use('/uploads', uploadsRouter);
+
+// Review routes
+app.use('/reviews/create', reviewCreateRouter);
+app.use('/reviews/list', reviewListRouter);
+app.use('/reviews/update', reviewUpdateRouter);
+app.use('/reviews/delete', reviewDeleteRouter);
+app.use('/reviews/helpful', reviewHelpfulRouter);
 
 app.use(notFound);
 app.use(errorConverter);
