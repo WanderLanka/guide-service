@@ -12,6 +12,7 @@ const GuideSchema = new mongoose.Schema(
       bio: String,
       languages: [String],
       avatar: String,
+      phone: String,
     },
     availability: [
       {
